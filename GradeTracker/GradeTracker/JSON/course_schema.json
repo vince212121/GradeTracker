@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "title": "JSON Schema for storing course information from a user",
+  "type": "object",
+  "required": [ "Code" ],
+  "additionalProperties": false,
+  "properties": {
+    "Code": {
+      "type": "string",
+      "description": "The course code",
+      "pattern": "^[A-Z]{4}-[0-9]{4}$"
+    },
+    "Evaluations": {
+      "type": "array",
+      "description": "This is used to store the evaluations for the course",
+      "items": {
+        "type": "object",
+        "required": [ "Description", "Weight", "OutOf", "EarnedMarks" ],
+        "additionalProperties": false,
+        "properties": {
+          "Description": {
+            "type": "string",
+            "description": "The description of the evaluation"
+          },
+          "Weight": {
+            "type": "number",
+            "description": "The % of the course mark attributed from the evaluation",
+            "minimum": 0,
+            "maximum": 100,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false
+          },
+          "OutOf": {
+            "type": "integer",
+            "description": "The number of marks that represents a perfect score on the evaluation",
+            "minimum": 0,
+            "exclusiveMinimum": false
+          },
+          "EarnedMarks": {
+            "type": [ "number", "null" ],
+            "description": "The student's score on the evalutation",
+            "minimum": 0,
+            "exclusiveMinimum": false
+          }
+        }
+      }
+    }
+  }
+}
